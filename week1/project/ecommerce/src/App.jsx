@@ -1,27 +1,35 @@
-import categories from "./fake-data/all-categories";
+import { useState } from "react";
 import products from "./fake-data/all-products";
+import Header from "./components/Header";
+import CategoryList from "./components/CategoryList";
+import ProductList from "./components/ProductList";
 
 function App() {
+    const [selectedCategory, setSelectedCategory] = useState("all");
+
+    const filteredProducts =
+        selectedCategory === "all"
+            ? products
+            : products.filter((product) =>
+                product.category.toLowerCase().includes(
+                    selectedCategory.toLowerCase()
+                )
+            );
+
+    const handleCategoryChange = (category) => {
+        setSelectedCategory(category);
+    };
+
     return (
-        <div>
-            <h1>Ecommerce Shop</h1>
-
-            <ul>
-                {categories.map((category) => (
-                    <li key={category}>{category}</li>
-                ))}
-            </ul>
-
-            <hr />
-
-            <ul>
-                {products.map((product) => (
-                    <li key={product.id}>
-                        <h3>{product.title}</h3>
-                        <p>€ {product.price}</p>
-                    </li>
-                ))}
-            </ul>
+        <div className="min-h-screen bg-gray-50">
+            <Header />
+            <main className="container mx-auto px-4 pb-8">
+                <CategoryList 
+                    selectedCategory={selectedCategory}
+                    onCategoryChange={handleCategoryChange}
+                />
+                <ProductList products={filteredProducts} />
+            </main>
         </div>
     );
 }
