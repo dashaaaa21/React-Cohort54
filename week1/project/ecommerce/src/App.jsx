@@ -10,10 +10,9 @@ function App() {
     const filteredProducts =
         selectedCategory === "all"
             ? products
-            : products.filter((product) =>
-                product.category.toLowerCase().includes(
-                    selectedCategory.toLowerCase()
-                )
+            : products.filter(
+                (product) =>
+                    product.category.toLowerCase() === selectedCategory.toLowerCase()
             );
 
     const handleCategoryChange = (category) => {
