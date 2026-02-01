@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
-import { FavouritesProvider } from "./context/FavouritesContext";
-import { CartProvider } from "./context/CartContext";
+import { FavouritesProvider } from "./context/FavouritesContext.jsx";
+import { CartProvider } from "./context/CartContext.jsx";
 import Header from "./components/Header";
 import HeroSection from "./components/HeroSection";
 import Navigation from "./components/Navigation";
