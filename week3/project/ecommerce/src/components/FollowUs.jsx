@@ -6,8 +6,6 @@ function FollowUs() {
   return (
     <section className="relative bg-gradient-to-br from-sky-500 via-sky-400 to-sky-500 text-white py-20 overflow-hidden">
       <div className="container mx-auto px-4 relative z-10 text-center">
-        <div className="w-20 h-20 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-8">
-        </div>
 
         <h2 className="text-5xl font-bold mb-6">Join Us!</h2>
         <p className="text-xl text-sky-100 mb-12 max-w-2xl mx-auto">

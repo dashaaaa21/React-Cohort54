@@ -3,6 +3,8 @@ import CategoryList from "../components/CategoryList";
 import ProductCard from "../components/ProductCard";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
+import Faq from "../components/Faq";
+import FollowUs from "../components/FollowUs";
 import { useFetch } from "../hooks/useFetch";
 import { fetchCategories, fetchProducts } from "../services/api";
 import foto1 from "../assets/foto1.jpg";
@@ -11,8 +13,6 @@ import foto3 from "../assets/foto3.jpg";
 
 function HomePage() {
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [openFaq, setOpenFaq] = useState(null);
-  const [activeSocial, setActiveSocial] = useState(null);
 
   const {
     data: categories,
@@ -38,24 +38,6 @@ function HomePage() {
 
   const error = categoriesError || productsError;
 
-  const faqs = [
-    {
-      question: "How to order?",
-      answer: "Click on the clothes you like. Click 'Add to Cart'. Then go to cart and click 'Checkout'."
-    },
-    {
-      question: "Can I return clothes?",
-      answer: "Yes! You can return clothes in 30 days. The clothes must be new and clean."
-    },
-    {
-      question: "Do you ship to other countries?",
-      answer: "Yes, we ship to many countries. Shipping time is 5-10 days."
-    },
-    {
-      question: "How to pick up my order?",
-      answer: "You can pick up at our store. We will send you a message when your order is ready."
-    }
-  ];
 
   if (error) {
     return (
@@ -131,118 +113,9 @@ function HomePage() {
         </div>
       </section>
 
-      <section className="bg-gray-50 py-16">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <div className="space-y-4">
-            {faqs.map((faq, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-3xl border-2 border-gray-200 overflow-hidden"
-              >
-                <button
-                  onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                  className="w-full px-8 py-6 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
-                >
-                  <h3 className="text-xl font-bold text-gray-900">{faq.question}</h3>
-                  <div className="w-12 h-12 rounded-full border-2 border-gray-900 flex items-center justify-center flex-shrink-0 ml-4">
-                    <span className="text-2xl transform transition-transform duration-300" style={{
-                      transform: openFaq === index ? 'rotate(180deg)' : 'rotate(0deg)'
-                    }}>
-                      v
-                    </span>
-                  </div>
-                </button>
-                {openFaq === index && (
-                  <div className="px-8 pb-6">
-                    <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Faq />
 
-      <section className="relative bg-gradient-to-br from-sky-500 via-sky-400 to-sky-500 text-white py-20 overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute inset-0" style={{
-            backgroundImage: 'url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.4"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")',
-          }}></div>
-        </div>
-
-        <div className="container mx-auto px-4 relative z-10 text-center">
-          <div className="w-20 h-20 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-8">
-          </div>
-          
-          <h2 className="text-5xl font-bold mb-6">Join Us!</h2>
-          <p className="text-xl text-sky-100 mb-12 max-w-2xl mx-auto">
-            Follow us on social media. Get news about new clothes and sales.
-          </p>
-
-          <div className="bg-white rounded-full p-2 max-w-3xl mx-auto mb-12 flex flex-wrap gap-2 justify-center">
-            <button 
-              onClick={() => setActiveSocial(activeSocial === 'instagram' ? null : 'instagram')}
-              className={`px-8 py-3 rounded-full transition-colors font-medium ${
-                activeSocial === 'instagram' 
-                  ? 'bg-sky-400 text-white' 
-                  : 'text-gray-700 hover:bg-sky-100'
-              }`}
-            >
-              Instagram
-            </button>
-            <button 
-              onClick={() => setActiveSocial(activeSocial === 'twitter' ? null : 'twitter')}
-              className={`px-8 py-3 rounded-full transition-colors font-medium ${
-                activeSocial === 'twitter' 
-                  ? 'bg-sky-400 text-white' 
-                  : 'text-gray-700 hover:bg-sky-100'
-              }`}
-            >
-              Twitter
-            </button>
-            <button 
-              onClick={() => setActiveSocial(activeSocial === 'linkedin' ? null : 'linkedin')}
-              className={`px-8 py-3 rounded-full transition-colors font-medium ${
-                activeSocial === 'linkedin' 
-                  ? 'bg-sky-400 text-white' 
-                  : 'text-gray-700 hover:bg-sky-100'
-              }`}
-            >
-              LinkedIn
-            </button>
-            <button 
-              onClick={() => setActiveSocial(activeSocial === 'whatsapp' ? null : 'whatsapp')}
-              className={`px-8 py-3 rounded-full transition-colors font-medium ${
-                activeSocial === 'whatsapp' 
-                  ? 'bg-sky-400 text-white' 
-                  : 'text-gray-700 hover:bg-sky-100'
-              }`}
-            >
-              Whatsapp
-            </button>
-            <button 
-              onClick={() => setActiveSocial(activeSocial === 'pinterest' ? null : 'pinterest')}
-              className={`px-8 py-3 rounded-full transition-colors font-medium ${
-                activeSocial === 'pinterest' 
-                  ? 'bg-sky-400 text-white' 
-                  : 'text-gray-700 hover:bg-sky-100'
-              }`}
-            >
-              Pinterest
-            </button>
-          </div>
-
-          {activeSocial && (
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 max-w-md mx-auto mb-8">
-              <p className="text-white text-lg">
-                Follow us on {activeSocial.charAt(0).toUpperCase() + activeSocial.slice(1)}: <span className="font-bold">@example.com</span>
-              </p>
-            </div>
-          )}
-
-          <p className="text-sky-200 text-sm">©2024, All Right Reserved.</p>
-        </div>
-      </section>
+      <FollowUs />
     </div>
   );
 }
